@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, request, session, abort, jsonify
+from flask import Flask, render_template, request, redirect, url_for, request, session, abort, jsonify, json
 from flaskext.mysql import MySQL
 from functools import wraps
 from werkzeug import generate_password_hash, check_password_hash
@@ -88,11 +88,11 @@ def login():
 @app.route('/search')
 @login_required
 def search():
-    is_session = None
+    is_session = None #sesija?
     if session.get('logged_in') == True:
         is_session = True
 
-    query = "SELECT first_name, last_name, name FROM user"
+    query = "SELECT first_name, last_name, name, user_id FROM user"
     cursor.execute(query)
 
     data = cursor.fetchall()
@@ -110,15 +110,26 @@ def logout():
 @app.route('/search_table/<term>')
 def search_table(term):
     if term == "all":
-        query = "SELECT first_name, last_name, name FROM user"
+        query = "SELECT first_name, last_name, name, user_id FROM user"
     else:
-        query = "SELECT first_name, last_name, name FROM user WHERE first_name LIKE '%"+term+"%' or last_name  LIKE '%"+term+"%' or name  LIKE '%"+term+"%'"
+        query = "SELECT first_name, last_name, name, user_id FROM user WHERE first_name LIKE '%"+term+"%' or last_name  LIKE '%"+term+"%' or name  LIKE '%"+term+"%'"
     cursor.execute(query)
 
     data = cursor.fetchall()
     # data = jsonify(data)
     print data
     return render_template("search_result.html", data=data)
+
+
+@app.route('/delete_row', methods=['GET', 'POST'])
+def delete_row():
+    # data = request.form['data']
+    # data = json.loads(data)
+    print request
+    # ids = request.form['ids']
+    # query = "DELETE * FROM user WHERE user_id IN (%s)"
+    # cursor.execute(query, (ids))
+    return "aaa"
 
 if __name__ == "__main__":
     app.run()

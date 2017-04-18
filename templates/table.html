@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PROJECT</title>
+    <title>Project</title>
 
+    <link type="text/css" rel="stylesheet" href="/static/bower_components/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/popup.css">
 
@@ -17,21 +18,23 @@
 
 </div>
 <div id="table" class="container">
-    <input type="text" name="search_table" placeholder="Search . . ." id="search_table" autocomplete="on">
+    <input type="text" name="search_table" placeholder="Search..." id="search_table" autocomplete="on">
     <table class="table table-inverse" id="tabela_korisnika">
       <thead>
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Username</th>
+          <th><i class="fa fa-trash-o fa-2x" id="delete_row" id="delete_row" aria-hidden="true" ></i></th>
         </tr>
       </thead>
       <tbody>
       {% for d in data %}
         <tr>
-          <td>{{ d[0] }}</td>
-          <td>{{ d[1] }}</td>
-          <td>{{ d[2] }}</td>
+            <td>{{ d[0] }}</td>
+            <td>{{ d[1] }}</td>
+            <td>{{ d[2] }}</td>
+            <td><input type="checkbox" name="chbDelete[]" id="chbDelete" value="{{d[3]}}"/></td>
         </tr>
       {% endfor %}
       </tbody>
@@ -48,5 +51,6 @@
 <script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/pretraga.js"></script>
+<script type="text/javascript" src="/static/js/brisanje.js"></script>
 </body>
 </html>
