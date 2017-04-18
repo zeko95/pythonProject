@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PROJECT</title>
+
+    <link type="text/css" rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/popup.css">
+
+
+</head>
+<body>
+<div id="header" class="container-fluid">
+    {% include "includes/header.html" %}
+
+</div>
+<div class="container">
+
+      <div class="jumbotron">
+        <h1>REGISTRATION</h1>
+        <form class="form-signin" id="signupForm" name="signupForm" method="POST" action="/signup">
+        <label for="inputFirstName" class="sr-only">First Name</label>
+        <input type="text" name="inputFirstName" id="inputFirstName" class="form-control" placeholder="First Name" required autofocus>
+        <label for="inputLastName" class="sr-only">Last Name</label>
+        <input type="text" name="inputLastName" id="inputLastName" class="form-control" placeholder="Last Name" required>
+        <label for="inputUserName" class="sr-only">User Name</label>
+        <input type="name" name="inputUserName" id="inputUserName" class="form-control" placeholder="Username" required>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="inputRepeatPassword" class="sr-only">Repeat Password</label>
+        <input type="password" name="inputRepeatPassword" id="inputRepeatPassword" class="form-control" placeholder="Repeat Password" required>
+
+        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+      </form>
+      </div>
+        <div id="greske">
+
+        </div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/js/signup.js" type="text/javaScript"></script>
+</body>
+</html>

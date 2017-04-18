@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PROJECT</title>
+
+    <link type="text/css" rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/popup.css">
+
+
+
+</head>
+<body>
+<div id="header" class="container-fluid">
+    {% include "includes/header.html" %}
+    {% include "includes/login.html" %}
+
+</div>
+<div id="table" class="container">
+    <input type="text" name="search_table" placeholder="Search . . ." id="search_table" autocomplete="on">
+    <table class="table table-inverse" id="tabela_korisnika">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for d in data %}
+        <tr>
+          <td>{{ d[0] }}</td>
+          <td>{{ d[1] }}</td>
+          <td>{{ d[2] }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/pretraga.js"></script>
+</body>
+</html>
