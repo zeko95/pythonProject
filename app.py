@@ -9,7 +9,7 @@ mysql = MySQL()
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
-app.config['MYSQL_DATABASE_DB'] = 'projectdb'
+app.config['MYSQL_DATABASE_DB'] = 'projectdb1'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.secret_key = 'why would I tell you my secret key?'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
