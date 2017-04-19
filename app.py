@@ -123,13 +123,15 @@ def search_table(term):
 
 @app.route('/delete_row', methods=['GET', 'POST'])
 def delete_row():
-    # data = request.form['data']
-    # data = json.loads(data)
-    print request
-    # ids = request.form['ids']
-    # query = "DELETE * FROM user WHERE user_id IN (%s)"
-    # cursor.execute(query, (ids))
+    data = request.form['data']
+    data = json.loads(data)
+    print data
+    for d in data:
+        print d
+        query = "DELETE FROM user WHERE user_id = "+d
+        cursor.execute(query)
     return "aaa"
 
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

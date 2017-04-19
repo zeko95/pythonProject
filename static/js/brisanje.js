@@ -3,10 +3,11 @@ $("#delete_row").on("click", function () {
     $.each($("input[name='chbDelete[]']:checked"), function() {
         ids.push($(this).val());
     });
-    var data = {'ids' : ids};
+    // var data = {'ids' : ids};
+    var data = JSON.stringify(ids, null);
     $.ajax({
         method:'POST',
-        data: JSON.stringify(ids, null),
+        data: {data: data},
         url: '/delete_row',
         success: function (response) {
             // $("#tabela_korisnika tbody").append(response);
