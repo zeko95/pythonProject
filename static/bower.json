@@ -1,0 +1,21 @@
+{
+  "name": "bower",
+  "homepage": "https://github.com/zeko95/pythonProject",
+  "authors": [
+    "zeko95 <nzecevic032@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.7.0",
+    "bootstrap": "^3.3.7"
+  }
+}
