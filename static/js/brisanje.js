@@ -3,7 +3,7 @@ $("#delete_row").on("click", function () {
     $.each($("input[name='chbDelete[]']:checked"), function() {
         ids.push($(this).val());
     });
-    // var data = {'ids' : ids};
+    $("#tabela_korisnika tbody").empty();
     var data = JSON.stringify(ids, null);
     $.ajax({
         method:'POST',

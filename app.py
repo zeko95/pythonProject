@@ -70,7 +70,7 @@ def login():
             cursor.execute(query, (username, password))
 
             data = cursor.fetchall()
-            print data
+            # print data
             if data is None:
                 print 'none'
                 error = "Username or Password is wrong"
@@ -95,7 +95,7 @@ def search():
 
     data = cursor.fetchall()
     # data = jsonify(data)
-    print data
+    # print data
     return render_template('table.html', is_session=is_session, data=data)
 
 
@@ -115,13 +115,13 @@ def search_table(term):
 
     data = cursor.fetchall()
     # data = jsonify(data)
-    print data
+    # print data
     return render_template("search_result.html", data=data)
 
 
 @app.route('/delete_row', methods=['GET', 'POST'])
 def delete_row():
-    ids = request.form['ids']
+    ids = request.form['data']
     ids = json.loads(ids)
     print ids
     for i in ids:
