@@ -47,11 +47,10 @@ def signup():
         last_name = request.form['inputLastName']
         name = request.form['inputUserName']
         password = request.form['inputPassword']
-        hashed_passwrd = generate_password_hash(password)
 
         # data = cursor.fetchall()
         query = "INSERT INTO user( name, password, role_id, first_name, last_name) VALUES (%s,%s, 2, %s,%s)"
-        cursor.execute(query, (name, hashed_passwrd, first_name ,last_name))
+        cursor.execute(query, (name, password, first_name ,last_name))
 
         # if len(data) is 0:
         conn.commit()
@@ -67,7 +66,6 @@ def login():
         if request.method == "POST":
             username = request.form['user']
             password = request.form['pass']
-            password = generate_password_hash(password)
             query = "SELECT * FROM user WHERE name LIKE %s AND password LIKE %s"
             cursor.execute(query, (username, password))
 
@@ -79,7 +77,7 @@ def login():
             else:
                 print 'sesija'
                 session['logged_in'] = True
-                session['username'] = request.form['username']
+                session['username'] = request.form['user']
                 return redirect(url_for("search"))
 
         return render_template("index.html", error=error)
@@ -123,15 +121,20 @@ def search_table(term):
 
 @app.route('/delete_row', methods=['GET', 'POST'])
 def delete_row():
-    data = request.form['data']
-    data = json.loads(data)
-    print data
-    for d in data:
-        print d
+    ids = request.form['ids']
+    ids = json.loads(ids)
+    print ids
+    for i in ids:
+        print i
         query = "DELETE FROM user WHERE user_id = %s"
-        cursor.execute(query, (d))
+        cursor.execute(query, (i))
         conn.commit()
-    return "aaa"
+    query1 = "SELECT first_name, last_name, name, user_id FROM user"
+    cursor.execute(query1)
+
+    data = cursor.fetchall()
+    print data
+    return render_template('search_result.html', data=data)
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ $("#delete_row").on("click", function () {
         data: {data: data},
         url: '/delete_row',
         success: function (response) {
-            // $("#tabela_korisnika tbody").append(response);
+            $("#tabela_korisnika tbody").append(response);
             console.log(response);
         }
     })
