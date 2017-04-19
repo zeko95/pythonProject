@@ -128,8 +128,9 @@ def delete_row():
     print data
     for d in data:
         print d
-        query = "DELETE FROM user WHERE user_id = "+d
-        cursor.execute(query)
+        query = "DELETE FROM user WHERE user_id = %s"
+        cursor.execute(query, (d))
+        conn.commit()
     return "aaa"
 
 
