@@ -2,10 +2,11 @@
     <div class="modal-dialog">
         <div class="loginmodal-container">
             <h1>Login to Your Account</h1><br>
-          <form method="POST" action="/login">
-            <input type="text" name="upd_first" placeholder="First Name" autofocus>
-            <input type="text" name="upd_last" placeholder="Last Name">
-            <input type="text" name="upd_username" placeholder="Username">
+            {{data}}
+          <form method="POST" id="updateForm" name="updateForm" action="/update_table">
+            <input type="text" name="input_upd_first" placeholder="First Name" autofocus>
+            <input type="text" name="input_upd_last" placeholder="Last Name">
+            <input type="text" name="input_upd_username" placeholder="Username">
             <input type="submit" name="update" class="login loginmodal-submit"  value="Update"><!--class promeni  -->
           </form>
         </div>

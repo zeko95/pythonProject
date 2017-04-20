@@ -37,16 +37,16 @@
             <td>{{ d[1] }}</td>
             <td>{{ d[2] }}</td>
             <td><input type="checkbox" name="chbDelete[]" id="chbDelete" value="{{d[3]}}"/></td>
-            <td><a href="#" data-toggle="modal" data-target="#update-modal">Edit</a></td>
+            <td><a href="#" data-toggle="modal" data-target="#update-modal" id="pera" data-id="{{d[3]}}">Edit</a></td>
         </tr>
       {% endfor %}
       </tbody>
     </table>
 </div>
 
-{% include "includes/update_table.html" %}
+<!--{% include "includes/update_table.html" %}-->
 
-
+<div id="nesto"></div>
 
 
 
@@ -55,5 +55,6 @@
 <script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/pretraga.js"></script>
 <script type="text/javascript" src="/static/js/brisanje.js"></script>
+<script type="text/javascript" src="/static/js/update_table.js"></script>
 </body>
 </html>

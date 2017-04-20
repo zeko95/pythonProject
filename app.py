@@ -137,5 +137,13 @@ def delete_row():
     return render_template('search_result.html', data=data)
 
 
+@app.route('/get_user/<id>', methods=['POST'])
+def get_user(id):
+    query = "SELECT first_name, last_name, name, user_id FROM user WHERE user_id="+id
+    cursor.execute(query)
+    data=cursor.fetchall()
+    print data
+    return render_template('includes/update_table.html', data=data)
+
 if __name__ == "__main__":
     app.run(debug=True)
