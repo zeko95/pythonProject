@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/static/bower_components/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/popup.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/custom.css">
 
 
 
@@ -26,6 +27,7 @@
           <th>Last Name</th>
           <th>Username</th>
           <th><i class="fa fa-trash-o fa-2x" id="delete_row" id="delete_row" aria-hidden="true" ></i></th>
+          <th><i class="fa fa-pencil-square-o  fa-2x" id="update_row" id="update_row" aria-hidden="true" ></i></th>
         </tr>
       </thead>
       <tbody>
@@ -35,6 +37,7 @@
             <td>{{ d[1] }}</td>
             <td>{{ d[2] }}</td>
             <td><input type="checkbox" name="chbDelete[]" id="chbDelete" value="{{d[3]}}"/></td>
+            <td><a href="#" data-toggle="modal" data-target="#update-modal">Edit</a></td>
         </tr>
       {% endfor %}
       </tbody>
