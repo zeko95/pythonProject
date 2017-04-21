@@ -22,11 +22,29 @@ cursor = conn.cursor()
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session:
+        if 'logged_in' in session :
             return f(*args, **kwargs)
         else:
             return redirect('/')
     return wrap
+
+def admin_required(func):
+    @wraps(func)
+    def decorated_func(*args, **kwargs):
+        if 'logged_in' in session and session['role_id'] == 1:
+            return func(*args, **kwargs)
+        else:
+            return redirect('/')
+            return decorated_func
+
+# def log_admin(a):
+#     @warps(a)
+#     def warp1(*args, **kwargs):
+#         if 'logged_in' in session and 'role_id' is 1:
+#             return a(*args, **kwargs)
+#         else:
+#             return redirect('/')
+#         return wrap1
 
 
 @app.route('/')
@@ -66,25 +84,29 @@ def login():
         if request.method == "POST":
             username = request.form['user']
             password = request.form['pass']
+            # print username
+            # print password
             query = "SELECT * FROM user WHERE name LIKE %s AND password LIKE %s"
             cursor.execute(query, (username, password))
 
-            data = cursor.fetchall()
+            data = cursor.fetchone()
             # print data
             if data is None:
                 print 'none'
                 error = "Username or Password is wrong"
             else:
-                print 'sesija'
+                # print 'sesija'
                 session['logged_in'] = True
                 session['username'] = request.form['user']
+                session['role_id'] = data[3]
+                # print session['role_id']
                 return redirect(url_for("search"))
-
         return render_template("index.html", error=error)
 
 
 @app.route('/search')
 @login_required
+# @log_admin
 def search():
     is_session = None #sesija?
     if session.get('logged_in') == True:
@@ -155,6 +177,7 @@ def update_table():
     query="UPDATE user SET name= %s,first_name= %s,last_name= %s WHERE user_id = %s"
 
     cursor.execute(query, (name, first_name, last_name, id))
+    conn.commit()
     data = cursor.fetchall()
     print data
     return redirect(url_for('search'))
