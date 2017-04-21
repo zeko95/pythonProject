@@ -1,14 +1,13 @@
-<div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+
     <div class="modal-dialog">
         <div class="loginmodal-container">
             <h1>Login to Your Account</h1><br>
-            {{data}}
           <form method="POST" id="updateForm" name="updateForm" action="/update_table">
-            <input type="text" name="input_upd_first" placeholder="First Name" autofocus>
-            <input type="text" name="input_upd_last" placeholder="Last Name">
-            <input type="text" name="input_upd_username" placeholder="Username">
+            <input type="text" name="input_upd_first" placeholder="First Name" value="{{ data[0] }}" autofocus>
+            <input type="text" name="input_upd_last" placeholder="Last Name" value="{{ data[1] }}" >
+            <input type="text" name="input_upd_username" placeholder="Username" value="{{ data[2] }}" >
+              <input type="hidden" name="user_id" value="{{ data[3] }}">
             <input type="submit" name="update" class="login loginmodal-submit"  value="Update"><!--class promeni  -->
           </form>
         </div>
     </div>
-</div>

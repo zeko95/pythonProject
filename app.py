@@ -141,7 +141,7 @@ def delete_row():
 def get_user(id):
     query = "SELECT first_name, last_name, name, user_id FROM user WHERE user_id="+id
     cursor.execute(query)
-    data=cursor.fetchall()
+    data=cursor.fetchone()
     print data
     return render_template('includes/update_table.html', data=data)
 
