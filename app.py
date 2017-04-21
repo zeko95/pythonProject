@@ -145,5 +145,19 @@ def get_user(id):
     print data
     return render_template('includes/update_table.html', data=data)
 
+
+@app.route('/update_table', methods=['POST'])
+def update_table():
+    first_name = request.form['input_upd_first']
+    last_name = request.form['input_upd_last']
+    name = request.form['input_upd_username']
+    id = request.form['user_id']
+    query="UPDATE user SET name= %s,first_name= %s,last_name= %s WHERE user_id = %s"
+
+    cursor.execute(query, (name, first_name, last_name, id))
+    data = cursor.fetchall()
+    print data
+    return redirect(url_for('search'))
+
 if __name__ == "__main__":
     app.run(debug=True)
