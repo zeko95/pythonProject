@@ -105,7 +105,8 @@ def login():
 
 
 @app.route('/search')
-@login_required
+# @login_required
+@admin_required
 # @log_admin
 def search():
     is_session = None #sesija?
