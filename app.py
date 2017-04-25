@@ -205,9 +205,11 @@ def upload_file():
         if upload_file and allowed_file(upload_file.filename):
             filename = secure_filename(upload_file.filename)
             upload_file.save(os.path.join(app.config['upload_folder'], filename))
+            path = app.config['upload_folder'] + upload_file.filename
             id = session['user_id']
             query = "INSERT INTO user(url) VALUES (%s) WHERE user_id =%s"
-            cursor.execute(query, (upload_file, id))
+            cursor.execute(query, (path, id))
+            conn.commit()
             return redirect(url_for('upload_file', filename=filename))
 
     else:
