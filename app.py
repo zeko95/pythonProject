@@ -1,10 +1,13 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, request, session, abort, jsonify, json
 from flaskext.mysql import MySQL
 from functools import wraps
 from werkzeug import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-
+upload_folder = 'static/img/userImg'
+allowed_ext=set(['png', 'jpg', 'jpeg', 'gif'])
 mysql = MySQL()
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -13,6 +16,7 @@ app.config['MYSQL_DATABASE_DB'] = 'projectdb1'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.secret_key = 'why would I tell you my secret key?'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config['upload_folder'] = upload_folder
 mysql.init_app(app)
 
 conn = mysql.connect()
@@ -35,7 +39,7 @@ def admin_required(func):
             return func(*args, **kwargs)
         else:
             return redirect('/')
-            return decorated_func
+    return decorated_func
 
 # def log_admin(a):
 #     @warps(a)
@@ -90,7 +94,7 @@ def login():
             cursor.execute(query, (username, password))
 
             data = cursor.fetchone()
-            # print data
+            print data
             if data is None:
                 print 'none'
                 error = "Username or Password is wrong"
@@ -99,6 +103,7 @@ def login():
                 session['logged_in'] = True
                 session['username'] = request.form['user']
                 session['role_id'] = data[3]
+                session['user_id'] = data[0]
                 # print session['role_id']
                 return redirect(url_for("search"))
         return render_template("index.html", error=error)
@@ -182,6 +187,33 @@ def update_table():
     data = cursor.fetchall()
     print data
     return redirect(url_for('search'))
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_ext
+
+
+@login_required
+@app.route('/upload_file', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        print request.files
+        if 'upload_file' not in request.files:
+            return redirect(url_for('upload_file'))
+        upload_file =request.files['upload_file']
+        if upload_file.filename == '':
+            return redirect(url_for('upload_file'))
+        if upload_file and allowed_file(upload_file.filename):
+            filename = secure_filename(upload_file.filename)
+            upload_file.save(os.path.join(app.config['upload_folder'], filename))
+            id = session['user_id']
+            query = "INSERT INTO user(url) VALUES (%s) WHERE user_id =%s"
+            cursor.execute(query, (upload_file, id))
+            return redirect(url_for('upload_file', filename=filename))
+
+    else:
+        return render_template('upload_file.html')
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

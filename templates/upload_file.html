@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project</title>
+
+    <link type="text/css" rel="stylesheet" href="/static/bower_components/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/popup.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/custom.css">
+
+
+
+</head>
+<body>
+<div id="header" class="container-fluid">
+    {% include "includes/header.html" %}
+    {% include "includes/login.html" %}
+
+</div>
+<div id="upload" class="container">
+    <h1>Upload new picture</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" id="upload_file" name="upload_file">
+        <button class="btn btn-default" action="/upload_file" type="submit">Button</button>
+    </form>
+</div>
+
+<div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"></div>
+
+<div id="nesto"></div>
+
+
+
+
+<script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/pretraga.js"></script>
+<script type="text/javascript" src="/static/js/brisanje.js"></script>
+<script type="text/javascript" src="/static/js/update_table.js"></script>
+</body>
+</html>
